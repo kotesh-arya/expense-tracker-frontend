@@ -1,10 +1,17 @@
 import React from "react";
+import { FaRupeeSign } from "react-icons/fa";
 
-const TransactionStatement = ({ text, amount }) => {
+const TransactionStatement = ({ text, amount, type }) => {
   return (
     <div className="flex flex-row shadow-md items-center justify-between w-full bg-white rounded-md mb-4 mt-3 p-2">
       <span className="">{text}</span>
-      <span className="">{amount}</span>
+      <span
+        className={`text-${
+          type === "expense" ? "red" : "green"
+        }-500 flex flex-row items-center`}
+      >
+        {type === "expense" ? "-" : "+"} <FaRupeeSign /> {amount}
+      </span>
     </div>
   );
 };

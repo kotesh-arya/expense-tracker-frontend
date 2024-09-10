@@ -1,10 +1,11 @@
-import { useState } from "react";
 import "./App.css";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
-import LinePlot from "./components/LinePlot";
 import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
+import Incomes from "./components/Incomes";
+import Expenses from "./components/Expenses";
+import Transactions from "./components/Transactions";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,17 +24,23 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
+  {
+    path: "/incomes",
+    element: <Incomes />,
+  },
+  {
+    path: "/expenses",
+    element: <Expenses />,
+  },
+  {
+    path: "/transactions",
+    element: <Transactions />,
+  },
 ]);
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="">
       <RouterProvider router={router} />
-      {/* <Signin /> */}
-      {/* <Dashboard /> */}
-      {/* <LinePlot  /> */}
-      {/* <Signup /> */}
     </div>
   );
 }

@@ -13,50 +13,33 @@ const Dashboard = () => {
     savingsProgress: [100, 200, 400, 600, 800],
   };
   return (
-    <div className="min-h-screen bg-white p-6 w-full   flex justify-center flex-row gap-10  ">
+    <div className="min-h-screen bg-gradient-to-r from-red-100 to-violet-100 p-6 w-full   flex justify-center flex-row gap-10  ">
       {/* Side nav container */}
       <SideNav />
-      <div className=" flex flex-row shadow-md justify-between rounded-md bg-amber-100 w-10/12  p-6">
+      <div className=" flex flex-row shadow-md justify-between rounded-md bg-amber-100 w-10/12 border-4 border-white  p-6">
         <div className="w-7/12">
-          <span className="font-bold text-xl ">All Transactions</span>
+          <span className="text-3xl font-extrabold ">All Transactions</span>
           <LinePlot data={expenseData} />
           <div className="flex flex-wrap gap-8 justify-center p-7 ">
-            <MoneyCard title={"Total Income"} amount={20000} color={"green"} />
-            <MoneyCard title={"Total Expenses"} amount={10000} color={"red"} />
-            <MoneyCard title={"Total Balace"} amount={10000} color={"white"} />
+            <MoneyCard title={"Total Income"} amount={20000} color="green" />
+            <MoneyCard title={"Total Expenses"} amount={5000} color="red" />
+            <MoneyCard title={"Total Balace"} amount={15000} color="black" />
           </div>
         </div>
         <div className="w-5/12 ">
-          <span className="font-bold text-xl ">Recent History</span>
+          <span className="text-3xl font-extrabold ">Recent History</span>
+          <TransactionStatement text="Shopify" amount="5000" type={"income"} />
+          <TransactionStatement text="Stocks" amount="5000" type={"income"} />
           <TransactionStatement
-            text="Dentist Appointment"
-            amount="2000"
+            text=" Dentist Appointment "
+            amount="5000"
             type={"expense"}
           />
+          <TransactionStatement text="Shopify" amount="5000" type={"income"} />
           <TransactionStatement
-            text="Travelling"
-            amount="2000"
-            type={"expense"}
-          />
-          <TransactionStatement
-            text="From Frelance"
-            amount="20000"
+            text="Investment returns"
+            amount="5000"
             type={"income"}
-          />
-          <TransactionStatement
-            text="Dentist Appointment"
-            amount="2000"
-            type={"expense"}
-          />
-          <TransactionStatement
-            text="Dentist Appointment"
-            amount="2000"
-            type={"expense"}
-          />
-          <TransactionStatement
-            text="Dentist Appointment"
-            amount="2000"
-            type={"expense"}
           />
         </div>
       </div>
