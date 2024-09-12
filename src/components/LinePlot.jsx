@@ -7,6 +7,8 @@ export default function LinePlot({ data }) {
     .scaleTime()
     .domain([data[0]?.date, data[data.length - 1]?.date])
     .range([0, 100]);
+  const dateFormatter = d3.timeFormat("%m/%d/%y"); // Adjust the format as needed
+
   let yScale = d3
     .scaleLinear()
     .domain([0, d3.max(data?.map((d) => d.value)) ?? 0])
@@ -22,7 +24,11 @@ export default function LinePlot({ data }) {
   if (!d) {
     return null;
   }
-
+  // const formattedDate = format(
+  //   new Date("2023-05-03T12:00:00.00+00:00"),
+  //   dateFormatter
+  // );
+  console.log(dateFormatter, "WTF***********");
   return (
     <div
       className="@container relative h-full w-full"
@@ -65,7 +71,7 @@ export default function LinePlot({ data }) {
               fill="currentColor"
               className="@sm:hidden text-xs"
             >
-              {format(day.date, "EEEEE")}
+              {format(day.date, dateFormatter(day.date))}
             </text>
           </g>
         ))}
