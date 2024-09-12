@@ -20,7 +20,7 @@ const SideNav = () => {
         </div>
         <div className="flex  flex-col p-1">
           <span className="font-bold text-xl pb-1">User</span>
-          <span>
+          <span className="flex flex-row items-center">
             <FaRupeeSign /> 15000
           </span>
         </div>
