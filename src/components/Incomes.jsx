@@ -43,7 +43,7 @@ const Incomes = () => {
           </span>
         </div>
         {/* Form and items container */}
-        <div className="w-full flex md:flex-col lg:flex-row md:justify-between md:gap-8  lg:justify-between">
+        <div className="w-full flex flex-col lg:flex-row md:justify-between md:gap-8  lg:justify-between">
           {/* form */}
           <div className="md:w-full lg:w-3/12  ">
             <form action="" className="flex flex-col items-end">
