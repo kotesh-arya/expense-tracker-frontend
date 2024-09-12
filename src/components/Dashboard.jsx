@@ -1,32 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
 import SideNav from "./SideNav";
 import LinePlot from "./LinePlot";
 import MoneyCard from "./MoneyCard";
 import TransactionStatement from "./TransactionStatement";
-
+import Hamburger from "./Hamburger";
+import { TiThMenu } from "react-icons/ti";
 const Dashboard = () => {
-  const expenseData = {
-    totalIncome: 11000,
-    totalExpenses: 0,
-    expensesByCategory: {},
-    budgetUtilization: [300, 500, 700, 1000, 1200],
-    savingsProgress: [100, 200, 400, 600, 800],
-  };
+  const [isHamburgerVisible, setIsHamburgerVisible] = useState(true);
+  console.log(isHamburgerVisible, "visible??");
+  function toggleHamburger() {
+    if (isHamburgerVisible) {
+      setIsHamburgerVisible(false);
+    } else {
+      setIsHamburgerVisible(true);
+    }
+  }
+  let sales = [
+    { date: "2023-04-30T12:00:00.00+00:00", value: 4 },
+    { date: "2023-05-01T12:00:00.00+00:00", value: 6 },
+    { date: "2023-05-02T12:00:00.00+00:00", value: 8 },
+    { date: "2023-05-03T12:00:00.00+00:00", value: 7 },
+    { date: "2023-05-04T12:00:00.00+00:00", value: 10 },
+    { date: "2023-05-05T12:00:00.00+00:00", value: 12 },
+    { date: "2023-05-06T12:00:00.00+00:00", value: 4 },
+  ];
+  let data = sales.map((d) => ({ ...d, date: new Date(d.date) }));
   return (
     <div className="min-h-screen bg-gradient-to-r from-red-100 to-violet-100 p-6 w-full   flex justify-center flex-row gap-10  ">
       {/* Side nav container */}
       <SideNav />
-      <div className=" flex flex-row shadow-md justify-between rounded-md bg-amber-100 w-10/12 border-4 border-white  p-6">
-        <div className="w-7/12">
+      {/* <span>huhu</span> */}
+      {!isHamburgerVisible ? (
+        <TiThMenu
+          className="lg:hidden absolute  left-2   md:left-4 top-4 cursor-pointer"
+          size={20}
+          onClick={toggleHamburger}
+        />
+      ) : null}
+      {isHamburgerVisible ? (
+        <Hamburger
+          isHamburgerVisible={isHamburgerVisible}
+          setIsHamburgerVisible={setIsHamburgerVisible}
+        />
+      ) : null}
+      <div className=" flex flex-col lg:flex-row shadow-md justify-between rounded-md bg-amber-100 w-11/12 lg:w-10/12 border-4 border-white  p-6">
+        <div className="md:w-full lg:w-7/12">
           <span className="text-3xl font-extrabold ">All Transactions</span>
-          <LinePlot data={expenseData} />
+          {/* New charts  */}
+          <div className="grid grid-cols-2 gap-x-4 gap-y-12 p-4">
+            <div className="col-span-2 h-60">
+              <LinePlot data={data} />
+            </div>
+            <div className="h-40">
+              <LinePlot data={data} />
+            </div>
+            <div className="h-40">
+              <LinePlot data={data} />
+            </div>
+          </div>
           <div className="flex flex-wrap gap-8 justify-center p-7 ">
             <MoneyCard title={"Total Income"} amount={20000} color="green" />
             <MoneyCard title={"Total Expenses"} amount={5000} color="red" />
             <MoneyCard title={"Total Balace"} amount={15000} color="black" />
           </div>
         </div>
-        <div className="w-5/12 ">
+        <div className="md:w-full lg:w-5/12 ">
           <span className="text-3xl font-extrabold ">Recent History</span>
           <TransactionStatement text="Shopify" amount="5000" type={"income"} />
           <TransactionStatement text="Stocks" amount="5000" type={"income"} />

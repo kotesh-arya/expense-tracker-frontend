@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "../../src/assets/money-pulse-logo.png";
+import { Link } from "react-router-dom";
 const Signin = () => {
   const handleFormSubmission = (e) => {
     e.preventDefault();
@@ -14,9 +15,14 @@ const Signin = () => {
     console.log(formData, "form data");
   };
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-0 lg:px-8">
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8  mt-0">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img className="mx-auto h-25 w-auto" src={Logo} alt="Your Company" />
+        <img
+          className="mx-auto w-auto"
+          src={Logo}
+          alt="Your Company"
+          style={{ width: "300px" }}
+        />
         <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign in to your account
         </h2>
@@ -89,12 +95,12 @@ const Signin = () => {
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member ?{"  "}
-          <a
-            href="#"
+          <Link
+            to={"/signup"}
             className="font-semibold leading-6 text-green-600 hover:text-green-500"
           >
             Signup
-          </a>
+          </Link>
         </p>
       </div>
     </div>

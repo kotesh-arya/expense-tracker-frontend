@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import SideNav from "./SideNav";
 import { FaRupeeSign } from "react-icons/fa";
+import { TiThMenu } from "react-icons/ti";
 import { IoMdAdd } from "react-icons/io";
 import TranasctionCard from "./TranasctionCard";
+import Hamburger from "./Hamburger";
 const Expenses = () => {
+  const [isHamburgerVisible, setIsHamburgerVisible] = useState(true);
+  console.log(isHamburgerVisible, "visible??");
+  function toggleHamburger() {
+    if (isHamburgerVisible) {
+      setIsHamburgerVisible(false);
+    } else {
+      setIsHamburgerVisible(true);
+    }
+  }
   return (
     <div className="min-h-screen bg-gradient-to-r from-red-100 to-violet-100 p-6 w-full   flex justify-center flex-row gap-10  ">
       {/* Side nav container */}
       <SideNav />
+      {!isHamburgerVisible ? (
+        <TiThMenu
+          className="lg:hidden absolute  left-2   md:left-4 top-4 cursor-pointer"
+          size={20}
+          onClick={toggleHamburger}
+        />
+      ) : null}
+      {isHamburgerVisible ? (
+        <Hamburger
+          isHamburgerVisible={isHamburgerVisible}
+          setIsHamburgerVisible={setIsHamburgerVisible}
+        />
+      ) : null}
       <div className=" flex flex-col shadow-md  rounded-md bg-amber-100 w-10/12 border-4 border-white px-6 py-2">
         {/* <span className="text-3xl font-extrabold">Incomes</span> */}
         {/* Amount Div */}
@@ -19,9 +43,9 @@ const Expenses = () => {
           </span>
         </div>
         {/* Form and items container */}
-        <div className="w-full flex flex-row  justify-between">
+        <div className="w-full flex md:flex-col lg:flex-row md:justify-between md:gap-8  lg:justify-between">
           {/* form */}
-          <div className="w-3/12  ">
+          <div className="md:w-full lg:w-3/12  ">
             <form action="" className="flex flex-col items-end">
               {/* Title input */}
               <input
@@ -77,7 +101,7 @@ const Expenses = () => {
               <IoMdAdd /> Add Expense
             </button>
           </div>
-          <div className="w-8/12 flex flex-col justify-between  ">
+          <div className="md:w-full lg:w-8/12 flex flex-col justify-between  ">
             <TranasctionCard
               title="Shopify"
               amount={5000}

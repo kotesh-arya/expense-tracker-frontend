@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import { TiThMenu } from "react-icons/ti";
 import SideNav from "./SideNav";
 import TranasctionCard from "./TranasctionCard";
+import Hamburger from "./Hamburger";
 
 const Transactions = () => {
+  const [isHamburgerVisible, setIsHamburgerVisible] = useState(true);
+  console.log(isHamburgerVisible, "visible??");
+  function toggleHamburger() {
+    if (isHamburgerVisible) {
+      setIsHamburgerVisible(false);
+    } else {
+      setIsHamburgerVisible(true);
+    }
+  }
   return (
     <div className="min-h-screen bg-gradient-to-r from-red-100 to-violet-100 p-6 w-full   flex justify-center flex-row gap-10  ">
       {/* Side nav container */}
       <SideNav />
+      {!isHamburgerVisible ? (
+        <TiThMenu
+          className="lg:hidden absolute  left-2   md:left-4 top-4 cursor-pointer"
+          size={20}
+          onClick={toggleHamburger}
+        />
+      ) : null}
+      {isHamburgerVisible ? (
+        <Hamburger
+          isHamburgerVisible={isHamburgerVisible}
+          setIsHamburgerVisible={setIsHamburgerVisible}
+        />
+      ) : null}
       <div className=" flex flex-col shadow-md  rounded-md bg-amber-100 w-10/12 border-4 border-white  p-6">
         <span className="text-3xl my-2 font-extrabold ">Transactions</span>
         <div className="flex flex-col justify-between">

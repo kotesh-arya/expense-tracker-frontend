@@ -1,30 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { GiReceiveMoney } from "react-icons/gi";
 import { GiPayMoney } from "react-icons/gi";
-import { Link, NavLink } from "react-router-dom";
-import { FaRupeeSign } from "react-icons/fa";
-
-const SideNav = () => {
+import { ImCross } from "react-icons/im";
+const Hamburger = ({ setIsHamburgerVisible, isHamburgerVisible }) => {
+  function toggleHamburger() {
+    if (isHamburgerVisible) {
+      setIsHamburgerVisible(false);
+    } else {
+      setIsHamburgerVisible(true);
+    }
+  }
   return (
-    <div className=" hidden lg:flex  lg:flex-col shadow-md rounded-md bg-amber-100  border-4 border-white  w-2/12 ">
-      {/* User Details */}
-      <div className="flex flex-row rounded-tr rounded-tl p-4 border-b-2 border-b-green-500 gap-3">
-        <div className="w-14 h-14">
-          <img
-            className="rounded-full "
-            src="https://i.pravatar.cc/300"
-            alt=""
-          />
-        </div>
-        <div className="flex  flex-col p-1">
-          <span className="font-bold text-xl pb-1">User</span>
-          <span>
-            <FaRupeeSign /> 15000
-          </span>
-        </div>
-      </div>
+    <div
+      className={`flex absolute left-0 top-0 z-50 lg:hidden flex-col items-end bg-amber-100 h-screen  transform ${
+        isHamburgerVisible ? "translate-x-0" : "-translate-x-full"
+      } transition-transform duration-300 ease-in-out`}
+    >
+      <span className="p-4 cursor-pointer" onClick={toggleHamburger}>
+        <ImCross />
+      </span>
       <ul className="p-6">
         <li className="font-bold text-md pb-4">
           <NavLink
@@ -74,4 +71,4 @@ const SideNav = () => {
   );
 };
 
-export default SideNav;
+export default Hamburger;
