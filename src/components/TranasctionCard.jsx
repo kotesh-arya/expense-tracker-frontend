@@ -8,7 +8,7 @@ import { GiPayMoney } from "react-icons/gi";
 
 const TranasctionCard = ({ title, amount, type, date, description }) => {
   return (
-    <div className="flex flex-col-reverse items-end md:flex-row justify-between w-full my-2 border-4 border-white rounded-md  p-4 shadow-md">
+    <div className="flex flex-col-reverse items-end md:flex-row justify-between w-full my-2 border border-gray-300 rounded-md  p-4 shadow-md">
       {/* Transaction icon */}
       <div className="flex flex-col md:flex-row justify-start  w-full  items-center md:w-9/12 gap-8">
         {type === "income" ? (

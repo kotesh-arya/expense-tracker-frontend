@@ -6,18 +6,15 @@ import { GiPayMoney } from "react-icons/gi";
 import { Link, NavLink } from "react-router-dom";
 import { FaRupeeSign } from "react-icons/fa";
 
+import { CircleUser } from "lucide-react";
+
 const SideNav = () => {
   return (
-    <div className=" hidden lg:flex  lg:flex-col shadow-md rounded-md bg-amber-100  border-4 border-white  w-2/12 ">
+    <div className=" hidden lg:flex  lg:flex-col shadow-md rounded-md   border border-gray-300  w-2/12 ">
       {/* User Details */}
-      <div className="flex flex-row rounded-tr rounded-tl p-4 border-b-2 border-b-green-500 gap-3">
-        <div className="w-14 h-14">
-          <img
-            className="rounded-full "
-            src="https://i.pravatar.cc/300"
-            alt=""
-          />
-        </div>
+      <div className="flex flex-row rounded-tr rounded-tl p-4 items-center   gap-3 border">
+        {/*  Replace icon with user uploaded image later!! */}
+        <CircleUser width={44} height={44} />
         <div className="flex  flex-col p-1">
           <span className="font-bold text-xl pb-1">User</span>
           <span className="flex flex-row items-center">

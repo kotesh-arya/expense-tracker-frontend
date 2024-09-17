@@ -15,7 +15,10 @@ const Transactions = () => {
     }
   }
   return (
-    <div className="min-h-screen bg-gradient-to-r from-red-100 to-violet-100 p-6 w-full   flex justify-center flex-row gap-10  ">
+    <div
+      onClick={toggleHamburger}
+      className="min-h-screen  p-6 w-full   flex justify-center flex-row gap-10  "
+    >
       {/* Side nav container */}
       <SideNav />
       {!isHamburgerVisible ? (
@@ -31,7 +34,7 @@ const Transactions = () => {
           setIsHamburgerVisible={setIsHamburgerVisible}
         />
       ) : null}
-      <div className=" flex flex-col shadow-md  rounded-md bg-amber-100 w-10/12 border-4 border-white  p-6">
+      <div className=" flex flex-col shadow-md  rounded-md  w-10/12 border border-gray-300  p-6">
         <span className="text-3xl my-2 font-extrabold ">Transactions</span>
         <div className="flex flex-col justify-between">
           <TranasctionCard

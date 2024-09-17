@@ -3,7 +3,7 @@ import { FaRupeeSign } from "react-icons/fa";
 
 const TransactionStatement = ({ text, amount, type }) => {
   return (
-    <div className="flex flex-row shadow-md items-center justify-between w-full bg-white rounded-md mb-4 mt-3 p-2">
+    <div className="flex flex-row shadow-md items-center justify-between w-full bg-white rounded-md mb-4 mt-8 p-2">
       <span className="">{text}</span>
       <span
         className={`text-${

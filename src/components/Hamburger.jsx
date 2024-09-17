@@ -15,11 +15,11 @@ const Hamburger = ({ setIsHamburgerVisible, isHamburgerVisible }) => {
   }
   return (
     <div
-      className={`flex absolute left-0 top-0 z-50 lg:hidden flex-col items-end bg-amber-100 h-screen  transform ${
+      className={`flex absolute left-0 top-0 z-50 lg:hidden flex-col items-end backdrop-blur-xl bg-white/30 rounded-lg p-4 h-screen  transform ${
         isHamburgerVisible ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 ease-in-out`}
     >
-      <span className="p-4 cursor-pointer" onClick={toggleHamburger}>
+      <span className="p-2 cursor-pointer" onClick={toggleHamburger}>
         <ImCross />
       </span>
       <ul className="p-6">

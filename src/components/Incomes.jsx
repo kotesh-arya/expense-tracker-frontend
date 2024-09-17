@@ -16,7 +16,10 @@ const Incomes = () => {
     }
   }
   return (
-    <div className="min-h-screen bg-gradient-to-r from-red-100 to-violet-100 p-6 w-full   flex justify-center flex-row gap-10  ">
+    <div
+      onClick={toggleHamburger}
+      className="min-h-screen  p-6 w-full   flex justify-center flex-row gap-10  "
+    >
       {/* Side nav container */}
       <SideNav />
       {!isHamburgerVisible ? (
@@ -32,7 +35,7 @@ const Incomes = () => {
           setIsHamburgerVisible={setIsHamburgerVisible}
         />
       ) : null}
-      <div className=" flex flex-col shadow-md  rounded-md bg-amber-100 w-10/12  border-4 border-white  px-6 py-2">
+      <div className=" flex flex-col shadow-md  rounded-md w-10/12  border border-gray-300  px-6 py-2">
         {/* <span className="text-3xl font-extrabold">Incomes</span> */}
         {/* Amount Div */}
         <div className="w-full border-2 border-white my-4 flex flex-col items-center">
@@ -51,25 +54,25 @@ const Incomes = () => {
               <input
                 type="text"
                 placeholder="Title"
-                className="w-full mb-8 bg-transparent rounded-md border-4 shadow-md border-white focus:border-none focus:outline-none   "
+                className="w-full mb-8 bg-transparent rounded-md  shadow-md border border-gray-300 focus:border-none focus:outline-none   "
               />
               {/* Amount Input */}
               <input
                 type="text"
                 placeholder="Amount"
-                className="w-full mb-8 bg-transparent rounded-md border-4 shadow-md border-white focus:border-none focus:outline-none   "
+                className="w-full mb-8 bg-transparent rounded-md  shadow-md border border-gray-300 focus:border-none focus:outline-none   "
               />
 
               {/* Date Input */}
               {/* <input
                 type="text"
-                className="w-full mb-8 bg-transparent rounded-md border-4 shadow-md border-white focus:border-none focus:outline-none   "
+                className="w-full mb-8 bg-transparent rounded-md  shadow-md border border-gray-300 focus:border-none focus:outline-none   "
               /> */}
 
               {/* Income category options input */}
               <select
                 type="select"
-                className="w-full mb-8 bg-transparent rounded-md border-4 shadow-md border-white focus:border-none focus:outline-none   "
+                className="w-full mb-8 bg-transparent rounded-md  shadow-md border border-gray-300 focus:border-none focus:outline-none   "
               >
                 <option className="bg-red-100 rounded-sm" value="one">
                   Select Category
@@ -94,11 +97,11 @@ const Incomes = () => {
               <input
                 type="text"
                 placeholder="Description"
-                className="w-full mb-8 bg-transparent rounded-md border-4 shadow-md border-white focus:border-none focus:outline-dashed   "
+                className="w-full mb-8 bg-transparent rounded-md  shadow-md border border-gray-300 focus:border-none focus:outline-dashed   "
               />
             </form>
-            <button className=" bg-green-500 hover:bg-green-600 p-2 flex items-center rounded-xl flex-row shadow-md">
-              <IoMdAdd /> Add Income
+            <button className=" bg-green-500 hover:bg-green-600 p-2 flex items-center rounded-xl w-full justify-center flex-row shadow-md">
+              Add Income
             </button>
           </div>
           <div className="md:w-full lg:w-8/12 flex flex-col justify-between  ">
