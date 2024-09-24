@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import SideNav from "./SideNav";
-import LinePlot from "./LinePlot";
 import MoneyCard from "./MoneyCard";
 import TransactionStatement from "./TransactionStatement";
 import Hamburger from "./Hamburger";
 import { TiThMenu } from "react-icons/ti";
+
+
 import { TransactionsBarChart } from "./TransactionsBarChart";
 import { IncomeRadialChart } from "./IncomeRadialChart";
 
 const Dashboard = () => {
+  // const [userDetails, setUserDetails] = useState({});
   const [isHamburgerVisible, setIsHamburgerVisible] = useState(true);
   function toggleHamburger() {
     if (isHamburgerVisible) {
@@ -38,18 +40,18 @@ const Dashboard = () => {
         />
       ) : null}
       <div className=" flex flex-col  shadow-md justify-between rounded-md w-10/12 border border-gray-300  p-6">
-        <div className="w-full flex flex-row">
+        <div className="w-full flex flex-col lg:flex-row">
           <div className="md:w-full lg:w-7/12  flex flex-col  ">
             <span className="text-3xl font-extrabold ">Monthly Statistics</span>
             {/* New charts  */}
             <div className="flex flex-col justify-between">
-              <div className="h-40 mt-10">
+              <div className=" mt-10">
                 <TransactionsBarChart />
               </div>
             </div>
           </div>
 
-          <div className="md:w-full lg:w-5/12  ">
+          <div className="md:w-full lg:w-5/12 mt-4 lg:mt-0 ">
             <span className="text-3xl font-extrabold mb-10 ">
               Recent History
             </span>
@@ -76,7 +78,8 @@ const Dashboard = () => {
             />
           </div>
         </div>
-        <div>
+        <div className="mt-4 lg:mt-0">
+          <span className="text-3xl font-extrabold ">Summary</span>
           <div className="flex flex-wrap gap-8 justify-center p-7 mt-1 ">
             <MoneyCard title={"Total Income"} amount={20000} color="green" />
             <MoneyCard title={"Total Expenses"} amount={5000} color="red" />

@@ -3,12 +3,20 @@ import { RxDashboard } from "react-icons/rx";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { GiReceiveMoney } from "react-icons/gi";
 import { GiPayMoney } from "react-icons/gi";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaRupeeSign } from "react-icons/fa";
+import { LogOut } from "lucide-react";
 
 import { CircleUser } from "lucide-react";
+import { useUser } from "@/Contexts/userContext.jsx";
 
 const SideNav = () => {
+  const navigate = useNavigate();
+  const logOutUser = () => {
+    localStorage.removeItem("authenticationToken");
+    navigate("/signin");
+  };
+  const userDetails = useUser();
   return (
     <div className=" hidden lg:flex  lg:flex-col shadow-md rounded-md   border border-gray-300  w-2/12 ">
       {/* User Details */}
@@ -16,7 +24,7 @@ const SideNav = () => {
         {/*  Replace icon with user uploaded image later!! */}
         <CircleUser width={44} height={44} />
         <div className="flex  flex-col p-1">
-          <span className="font-bold text-xl pb-1">User</span>
+          <span className="font-bold text-xl pb-1">{userDetails.username}</span>
           <span className="flex flex-row items-center">
             <FaRupeeSign /> 15000
           </span>
@@ -29,7 +37,6 @@ const SideNav = () => {
               isActive,
               isPending,
             }) => {
-              console.log(isActive, " is it active ?? ");
               return isPending
                 ? "text-black"
                 : isActive
@@ -67,6 +74,14 @@ const SideNav = () => {
           </NavLink>
         </li>
       </ul>
+      <div className="w-full ">
+        <span
+          onClick={logOutUser}
+          className="cursor-pointer font-bold text-red-500 flex justify-evenly w-full"
+        >
+          Log out <LogOut />
+        </span>
+      </div>
     </div>
   );
 };

@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { GiReceiveMoney } from "react-icons/gi";
 import { GiPayMoney } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
+import { LogOut } from "lucide-react";
+
+import { useUser } from "@/Contexts/userContext";
 const Hamburger = ({ setIsHamburgerVisible, isHamburgerVisible }) => {
+  const navigate = useNavigate();
+
   function toggleHamburger() {
     if (isHamburgerVisible) {
       setIsHamburgerVisible(false);
@@ -13,6 +18,12 @@ const Hamburger = ({ setIsHamburgerVisible, isHamburgerVisible }) => {
       setIsHamburgerVisible(true);
     }
   }
+  const logOutUser = () => {
+    localStorage.removeItem("authenticationToken");
+    navigate("/signin");
+  };
+
+  const userDetails = useUser();
   return (
     <div
       className={`flex absolute left-0 top-0 z-50 lg:hidden flex-col items-end backdrop-blur-xl bg-white/30 rounded-lg p-4 h-screen  transform ${
@@ -29,7 +40,6 @@ const Hamburger = ({ setIsHamburgerVisible, isHamburgerVisible }) => {
               isActive,
               isPending,
             }) => {
-              console.log(isActive, " is it active ?? ");
               return isPending
                 ? "text-black"
                 : isActive
@@ -67,6 +77,14 @@ const Hamburger = ({ setIsHamburgerVisible, isHamburgerVisible }) => {
           </NavLink>
         </li>
       </ul>
+      <div className="w-full ">
+        <span
+          onClick={logOutUser}
+          className="cursor-pointer font-bold text-red-500 flex justify-evenly w-full"
+        >
+          Log out <LogOut />
+        </span>
+      </div>
     </div>
   );
 };

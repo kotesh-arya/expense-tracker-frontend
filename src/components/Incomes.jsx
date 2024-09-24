@@ -7,7 +7,6 @@ import TranasctionCard from "./TranasctionCard";
 import Hamburger from "./Hamburger";
 const Incomes = () => {
   const [isHamburgerVisible, setIsHamburgerVisible] = useState(true);
-  console.log(isHamburgerVisible, "visible??");
   function toggleHamburger() {
     if (isHamburgerVisible) {
       setIsHamburgerVisible(false);

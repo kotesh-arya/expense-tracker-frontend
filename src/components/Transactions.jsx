@@ -6,7 +6,6 @@ import Hamburger from "./Hamburger";
 
 const Transactions = () => {
   const [isHamburgerVisible, setIsHamburgerVisible] = useState(true);
-  console.log(isHamburgerVisible, "visible??");
   function toggleHamburger() {
     if (isHamburgerVisible) {
       setIsHamburgerVisible(false);

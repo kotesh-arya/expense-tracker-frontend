@@ -28,7 +28,6 @@ export default function LinePlot({ data }) {
   //   new Date("2023-05-03T12:00:00.00+00:00"),
   //   dateFormatter
   // );
-  console.log(dateFormatter, "WTF***********");
   return (
     <div
       className="@container relative h-full w-full"

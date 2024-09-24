@@ -1,18 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../src/assets/money-pulse-logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { LoaderIcon } from "lucide-react";
+import { useForm } from "react-hook-form";
 
 const Signup = () => {
-  const handleFormSubmission = (e) => {
-    e.preventDefault();
-    const formData = {};
-    Array.from(e.target.elements).forEach((element) => {
-      console.log(element.name);
-      if (element.name) {
-        formData[element.name] = element.value;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [token, setToken] = useState("");
+  const handleFormSubmission = async (data) => {
+
+    
+    setIsLoading(true);
+    try {
+      //  Todo:  Make this URL dynamic using .env to adapt both local and hosted backend
+      const signupResponse = await axios.post(
+        "http://localhost:8080/api/auth/register",
+        data
+      );
+
+      localStorage.setItem("authenticationToken", signupResponse.data.token);
+      const authToken = localStorage.getItem("authenticationToken");
+
+      setToken(authToken);
+      if (authToken) {
+        toast.success("Registered Successfully, Welcome!");
+        navigate("/");
       }
-    });
+    } catch (error) {
+      toast.error(error.response.data.msg);
+      console.log("error while dealing with token", error.response.data.msg);
+    } finally {
+      setIsLoading(false);
+    }
   };
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token]);
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -29,7 +62,7 @@ const Signup = () => {
 
       <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
         <form
-          onSubmit={(e) => handleFormSubmission(e)}
+          onSubmit={handleSubmit(handleFormSubmission)}
           className="space-y-6"
           //   action="#"
           //   method="POST"
@@ -49,7 +82,11 @@ const Signup = () => {
                 autoComplete="email"
                 required=""
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                {...register("email", { required: true })}
               />
+              {errors.email && (
+                <p className="text-red-500">Email is required</p>
+              )}
             </div>
           </div>
 
@@ -68,7 +105,11 @@ const Signup = () => {
                 autoComplete="username"
                 required=""
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                {...register("username", { required: true })}
               />
+              {errors.username && (
+                <p className="text-red-500">Username is required</p>
+              )}
             </div>
           </div>
 
@@ -97,16 +138,22 @@ const Signup = () => {
                 autoComplete="current-password"
                 required=""
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                {...register("password", { required: true, minLength: 6 })}
               />
+              {errors.password && (
+                <p className="text-red-500">
+                  Password is required and must be at least 6 characters long
+                </p>
+              )}
             </div>
           </div>
 
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+              className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500  focus-visible:outline-green-600"
             >
-              Sign up
+              {isLoading ? <LoaderIcon className="animate-spin" /> : "Sign up"}
             </button>
           </div>
         </form>
