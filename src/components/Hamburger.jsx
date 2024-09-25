@@ -23,13 +23,14 @@ const Hamburger = ({ setIsHamburgerVisible, isHamburgerVisible }) => {
     navigate("/signin");
   };
 
-  const userDetails = useUser();
+  const { userDetails } = useUser();
   return (
     <div
       className={`flex absolute left-0 top-0 z-50 lg:hidden flex-col items-end backdrop-blur-xl bg-white/30 rounded-lg p-4 h-screen  transform ${
         isHamburgerVisible ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 ease-in-out`}
     >
+      <h2>{userDetails.username}</h2>
       <span className="p-2 cursor-pointer" onClick={toggleHamburger}>
         <ImCross />
       </span>

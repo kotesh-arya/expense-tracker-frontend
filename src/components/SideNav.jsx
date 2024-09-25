@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RxDashboard } from "react-icons/rx";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { GiReceiveMoney } from "react-icons/gi";
 import { GiPayMoney } from "react-icons/gi";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaRupeeSign } from "react-icons/fa";
 import { LogOut } from "lucide-react";
 
@@ -16,7 +16,11 @@ const SideNav = () => {
     localStorage.removeItem("authenticationToken");
     navigate("/signin");
   };
-  const userDetails = useUser();
+  const { userDetails, setUserUpdate } = useUser();
+  // console.log(userDetails);
+  console.log("side nav is rendering");
+  setUserUpdate((prev) => !prev);
+
   return (
     <div className=" hidden lg:flex  lg:flex-col shadow-md rounded-md   border border-gray-300  w-2/12 ">
       {/* User Details */}

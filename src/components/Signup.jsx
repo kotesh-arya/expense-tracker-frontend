@@ -4,7 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { LoaderIcon } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
+
 import { useForm } from "react-hook-form";
+import { useUser } from "@/Contexts/userContext";
 
 const Signup = () => {
   const {
@@ -15,9 +18,14 @@ const Signup = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState("");
-  const handleFormSubmission = async (data) => {
+  const [showPassword, setShowPassword] = useState(false);
 
-    
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const { setUserUpdate } = useUser();
+
+  const handleFormSubmission = async (data) => {
     setIsLoading(true);
     try {
       //  Todo:  Make this URL dynamic using .env to adapt both local and hosted backend
@@ -32,6 +40,7 @@ const Signup = () => {
       setToken(authToken);
       if (authToken) {
         toast.success("Registered Successfully, Welcome!");
+        setUserUpdate((prev) => !prev);
         navigate("/");
       }
     } catch (error) {
@@ -130,22 +139,29 @@ const Signup = () => {
                 </a>
               </div> */}
             </div>
-            <div className="mt-2">
+            <div className="mt-2 relative">
               <input
                 id="password"
                 name="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 required=""
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                 {...register("password", { required: true, minLength: 6 })}
               />
-              {errors.password && (
-                <p className="text-red-500">
-                  Password is required and must be at least 6 characters long
-                </p>
-              )}
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute right-2 top-2 text-gray-500 hover:text-gray-700"
+              >
+                {showPassword ? <Eye /> : <EyeOff />}
+              </button>
             </div>
+            {errors.password && (
+              <p className="text-red-500">
+                Password is required and must be at least 6 characters long
+              </p>
+            )}
           </div>
 
           <div>

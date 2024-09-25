@@ -28,7 +28,7 @@ const Signin = () => {
       //  Todo:  Make this URL dynamic using .env to adapt both local and hosted backend
       const loginResponse = await axios.post(
         "http://localhost:8080/api/auth/login",
-        data
+        data  
       );
 
       localStorage.setItem("authenticationToken", loginResponse.data.token);
@@ -40,7 +40,7 @@ const Signin = () => {
         navigate("/");
       }
     } catch (error) {
-      // toast.error(error.response.data.msg);
+      toast.error(error.response.data.msg);
       console.log("Error while Logging in ", error);
     } finally {
       setIsLoading(false);
@@ -103,14 +103,14 @@ const Signin = () => {
               >
                 Password
               </label>
-              <div className="text-sm">
+              {/* <div className="text-sm">
                 <a
                   href="#"
                   className="font-semibold text-green-600 hover:text-green-500"
                 >
                   Forgot password?
                 </a>
-              </div>
+              </div> */}
             </div>
             <div className="mt-2 relative">
               <input
