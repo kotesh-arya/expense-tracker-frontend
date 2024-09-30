@@ -28,9 +28,13 @@ const Signup = () => {
   const handleFormSubmission = async (data) => {
     setIsLoading(true);
     try {
-      //  Todo:  Make this URL dynamic using .env to adapt both local and hosted backend
+    
       const signupResponse = await axios.post(
-        "http://localhost:8080/api/auth/register",
+        `${
+          import.meta.env.VITE_ENVIRONMENT === "prod"
+            ? "https://expense-tracker-backend-x1v1.onrender.com"
+            : "http://localhost:8080"
+        }/api/auth/register`,
         data
       );
 

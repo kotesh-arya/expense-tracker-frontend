@@ -6,21 +6,25 @@ const UserContext = createContext(null);
 
 // Define the UserProvider component
 const UserProvider = ({ children }) => {
-  console.log("User provider component is rendering");
+  // console.log("User provider component is rendering");
   // Initialize state
   const [userUpdate, setUserUpdate] = useState(true);
   const [userDetails, setUserDetails] = useState({});
   async function fetchUserDetails() {
-    console.log("fetching user details now");
+    // console.log("fetching user details now");
     if (!localStorage.getItem("authenticationToken")) {
       return;
     }
     try {
       // setIsLoading(true);
-      console.log("api called to get current user detalls");
+      // console.log("api called to get current user detalls");
       //  Todo:  Make this URL dynamic using .env to adapt both local and hosted backend
       const userDetailsResponse = await axios.get(
-        "http://localhost:8080/api/me",
+        `${
+          import.meta.env.VITE_ENVIRONMENT === "prod"
+            ? "https://expense-tracker-backend-x1v1.onrender.com"
+            : "http://localhost:8080"
+        }/api/me`,
         {
           headers: {
             "x-auth-token": localStorage.getItem("authenticationToken"),
@@ -35,7 +39,7 @@ const UserProvider = ({ children }) => {
     }
   }
   useEffect(() => {
-    console.log("from useEffect");
+    // console.log("from useEffect");
     fetchUserDetails();
   }, []);
 

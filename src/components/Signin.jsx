@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import Logo from "../../src/assets/money-pulse-logo.png";
 import { Link, useNavigate } from "react-router-dom";
 const Signin = () => {
+  // console.log("current environment --->", import.meta.env.VITE_ENVIRONMENT);
+
   const {
     register,
     handleSubmit,
@@ -25,10 +27,14 @@ const Signin = () => {
   const handleFormSubmission = async (data) => {
     try {
       setIsLoading(true);
-      //  Todo:  Make this URL dynamic using .env to adapt both local and hosted backend
+   
       const loginResponse = await axios.post(
-        "http://localhost:8080/api/auth/login",
-        data  
+        `${
+          import.meta.env.VITE_ENVIRONMENT === "prod"
+            ? "https://expense-tracker-backend-x1v1.onrender.com"
+            : "http://localhost:8080"
+        }/api/auth/login`,
+        data
       );
 
       localStorage.setItem("authenticationToken", loginResponse.data.token);
